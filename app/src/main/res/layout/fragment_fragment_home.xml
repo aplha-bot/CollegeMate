@@ -5,4 +5,44 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentHome"/>
+    tools:context=".FragmentHome">
+
+    <Button
+        android:id="@+id/home_frag_assignment_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/roundcornor_ripple"
+        android:backgroundTint="@color/colorTriadic"
+        android:text="Assignment Reminder"
+        android:textAppearance="@style/NormalTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/fragment_home_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/roundcornor_ripple"
+        android:backgroundTint="@color/colorSecondary"
+        android:src="@drawable/scan_icon"
+        android:tint="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/fragment_home_addsubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/roundcornor_ripple"
+        android:backgroundTint="@color/colorTriadic"
+        android:text="Add Subject"
+        android:textAppearance="@style/NormalTextStyle"
+        app:layout_constraintBottom_toBottomOf="@+id/home_frag_assignment_reminder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/home_frag_assignment_reminder" />
+</androidx.constraintlayout.widget.ConstraintLayout>

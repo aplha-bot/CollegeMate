@@ -17,7 +17,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,6 +120,8 @@ public class Home extends AppCompatActivity {
                 switch (position){
                     case 2 : startActivity(new Intent(Home.this,TimeTable.class));break;
                     case 3 : startActivity(new Intent(Home.this,Attendance.class));break;
+                    case 4: startActivity(new Intent(Home.this,Books.class));break;
+                    case 0: startActivity(new Intent(Home.this,Profile.class));break;
                 }
             }
         });
@@ -123,7 +130,14 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(Global.webClientId)
+                        .requestEmail()
+                        .build();
+                GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(Home.this, gso);
+                mGoogleSignInClient.signOut();
                 startActivity(new Intent(Home.this,HomeActivity.class));
+
                 finish();
             }
         });

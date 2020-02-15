@@ -69,6 +69,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         google.setOnClickListener(googlebuttonlistener);
+
+
     }
     int RC_SIGN_IN =100;
     private View.OnClickListener googlebuttonlistener = new View.OnClickListener() {

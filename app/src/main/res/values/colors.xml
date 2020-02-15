@@ -7,4 +7,6 @@
     <color name="colorComplementary">#cfa83e</color>
     <color name="colorTriadic">#7400ad</color>
     <color name = "colorAnalogous">#35b6c9</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGrey">#ebebeb</color>
 </resources>

@@ -39,4 +39,8 @@
         <item name="android:textColor">#000000</item>
     </style>
 
+    <style name="NormalTextViewAppearance" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">#000000</item>
+    </style>
+
 </resources>

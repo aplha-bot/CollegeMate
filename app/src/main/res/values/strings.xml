@@ -36,4 +36,12 @@
         <item>Delete Subject</item>
         <item>Edit Subject name</item>
     </array>
+
+    <array name="year_info">
+        <item>First Year</item>
+        <item>Second Year</item>
+        <item>Third Year</item>
+        <item>Fourth Year</item>
+    </array>
+
 </resources>

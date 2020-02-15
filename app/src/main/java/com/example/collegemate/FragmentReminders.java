@@ -4,11 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
 
 
 /**
@@ -20,6 +30,51 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FragmentReminders extends Fragment {
+
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+
+        @NonNull
+        @Override
+        public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = getLayoutInflater().inflate(R.layout.recycler_reminders,parent,false);
+            return new ViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
+
+            Global.ModalClasses.AssignmentModal data = Global.documentData.assignment.get(position);
+            holder.subname.setText(data.subject);
+            Long time = data.timestamp;
+            Date date  =  new Date(time);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
+            holder.date.setText(dateFormat.format(date));
+            holder.time.setText(timeFormat.format(date));
+            holder.details.setText(data.details);
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return Global.documentData.assignment.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+
+            TextView subname,time,date,details;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                subname = itemView.findViewById(R.id.recycler_reminder_subject);
+                time = itemView.findViewById(R.id.recycler_reminder_time);
+                date = itemView.findViewById(R.id.recycler_reminder_date);
+                details = itemView.findViewById(R.id.recycler_reminder_details);
+            }
+        }
+    }
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,11 +117,25 @@ public class FragmentReminders extends Fragment {
         }
     }
 
+    static RecyclerViewAdapter adapter;
+    RecyclerView rv;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reminders, container, false);
+
+        if(Global.documentData.assignment == null){
+            Global.documentData.assignment = new ArrayList<>();
+        }
+
+        View rootview = inflater.inflate(R.layout.fragment_reminders, container, false);
+        rv = rootview.findViewById(R.id.fragment_reminder_rv);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new RecyclerViewAdapter();
+        rv.setAdapter(adapter);
+
+        return rootview;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

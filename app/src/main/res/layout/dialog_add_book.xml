@@ -2,24 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
+    android:id="@+id/linearLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/signup_info_dialog_toolbar"
-        android:layout_width="409dp"
+        android:id="@+id/dialog_add_book_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Account Details"
-        app:titleTextColor="#ffffff"
         app:navigationIcon="@drawable/close_icon"
+        app:title="Add Book"
+        app:titleTextColor="@color/colorWhite"
         tools:layout_editor_absoluteX="1dp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout9"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -27,26 +29,35 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_info_dialog_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/dialog_add_book_toolbar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/signup_info_dialog_name"
+            android:id="@+id/dialog_add_book_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Your Name" />
+            android:hint="Enter the name" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/signup_info_dialog_submit"
+    <ImageButton
+        android:id="@+id/dialog_add_book_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/roundcornor_ripple"
         android:backgroundTint="@color/colorSecondary"
-        android:text="Submit"
-        android:textAppearance="@style/NormalTextStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/upload_icon" />
+
+    <ImageView
+        android:id="@+id/dialog_add_books_image_preview"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_add_book_upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

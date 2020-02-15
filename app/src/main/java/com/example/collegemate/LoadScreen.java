@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LoadScreen extends AppCompatActivity {
@@ -32,13 +35,29 @@ public class LoadScreen extends AppCompatActivity {
         //Refrencing
         pb = findViewById(R.id.loadscreen_pb);
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Global.userFieldRef = db.collection("commonData").document("userFields");
+        Global.userFieldRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Global.branches = (List<String>) task.getResult().get("branches");
+                Global.batches = (List<String>) task.getResult().get("batches");
+
+                if (isUserExists()){
+                    loadDataAndStartActivity();
+                    Toast.makeText(LoadScreen.this, "user Exists", Toast.LENGTH_SHORT).show();
+                }else{
+                    startActivity(new Intent(LoadScreen.this,HomeActivity.class));
+                    finish();
+                }
+
+            }
+        });
+
+
+
         //Check User Existence
-        if (isUserExists()){
-            loadDataAndStartActivity();
-        }else{
-            startActivity(new Intent(LoadScreen.this,HomeActivity.class));
-            finish();
-        }
+
 
 
     }
@@ -52,6 +71,9 @@ public class LoadScreen extends AppCompatActivity {
                 if(task.getResult()!=null){
                     Global.documentData = task.getResult().toObject(Global.UserData.class);
                     startActivity(new Intent(LoadScreen.this,Home.class));
+                    finish();
+                }else{
+                    Toast.makeText(LoadScreen.this, "Please connect to Internet", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
